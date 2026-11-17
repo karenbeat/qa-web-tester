@@ -1,0 +1,479 @@
+{
+  "url": "http://localhost:8000/checkout.html",
+  "executado_em": "2026-09-10T18:29:50",
+  "total": 23,
+  "passou": 10,
+  "falhou": 13,
+  "atencao": 0,
+  "erro": 0,
+  "resultados": [
+    {
+      "id": "1.1",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "Campo vazio deve bloquear e exibir mensagem",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        ""
+      ],
+      "esperado": "bloqueia",
+      "status": "PASSOU",
+      "motivo": "bloqueou e exibiu \"Informe o CPF\"",
+      "campo_marcado_invalido": true,
+      "mensagem_do_campo": "Informe o CPF",
+      "valor_final_do_campo": "",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [
+        "Informe o CPF"
+      ],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.1.png"
+    },
+    {
+      "id": "1.2",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "CPF válido deve ser aceito",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        "52998224725"
+      ],
+      "esperado": "aceita",
+      "status": "PASSOU",
+      "motivo": "aceitou o valor válido e concluiu o envio",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "529.982.247-25",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.2.png"
+    },
+    {
+      "id": "1.3",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "CPF com dígito verificador errado deve ser rejeitado",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        "52998224726"
+      ],
+      "esperado": "bloqueia",
+      "status": "PASSOU",
+      "motivo": "bloqueou e exibiu \"CPF inválido\"",
+      "campo_marcado_invalido": true,
+      "mensagem_do_campo": "CPF inválido",
+      "valor_final_do_campo": "529.982.247-26",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [
+        "CPF inválido"
+      ],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.3.png"
+    },
+    {
+      "id": "1.4",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "CPF com todos os dígitos iguais deve ser rejeitado",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        "11111111111"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "111.111.111-11",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.4.png"
+    },
+    {
+      "id": "1.5",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "Máscara deve formatar 52998224725 como 529.982.247-25",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        "52998224725"
+      ],
+      "esperado": "mascara",
+      "status": "PASSOU",
+      "motivo": "máscara aplicada corretamente: \"529.982.247-25\"",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "529.982.247-25",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.5.png"
+    },
+    {
+      "id": "1.6",
+      "cenario": "Cenário 1 — Campo CPF",
+      "descricao": "CPF incompleto deve ser rejeitado",
+      "campo_alvo": "#cpf",
+      "entrada": [
+        "529982247"
+      ],
+      "esperado": "bloqueia",
+      "status": "PASSOU",
+      "motivo": "bloqueou e exibiu \"CPF inválido\"",
+      "campo_marcado_invalido": true,
+      "mensagem_do_campo": "CPF inválido",
+      "valor_final_do_campo": "529.982.247",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [
+        "CPF inválido"
+      ],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_1.6.png"
+    },
+    {
+      "id": "2.1",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "descricao": "E-mail sem domínio deve ser rejeitado",
+      "campo_alvo": "#email",
+      "entrada": [
+        "cliente@"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "cliente@",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_2.1.png"
+    },
+    {
+      "id": "2.2",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "descricao": "E-mail sem TLD deve ser rejeitado",
+      "campo_alvo": "#email",
+      "entrada": [
+        "cliente@exemplo"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "cliente@exemplo",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_2.2.png"
+    },
+    {
+      "id": "2.3",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "descricao": "Nome com apenas espaços deve ser tratado como vazio",
+      "campo_alvo": "#nome",
+      "entrada": [
+        "   "
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "   ",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_2.3.png"
+    },
+    {
+      "id": "2.4",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "descricao": "DDD inexistente (00) deve ser rejeitado",
+      "campo_alvo": "#telefone",
+      "entrada": [
+        "00999998888"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "(00) 99999-8888",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_2.4.png"
+    },
+    {
+      "id": "3.1",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "Número de cartão que falha no algoritmo de Luhn deve ser rejeitado",
+      "campo_alvo": "#cartao",
+      "entrada": [
+        "4539578763621487"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "4539578763621487",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.1.png"
+    },
+    {
+      "id": "3.2",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "Sequência óbvia de dígitos deve ser rejeitada",
+      "campo_alvo": "#cartao",
+      "entrada": [
+        "1111111111111111"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "1111111111111111",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.2.png"
+    },
+    {
+      "id": "3.3",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "Validade no passado deve ser rejeitada",
+      "campo_alvo": "#validade",
+      "entrada": [
+        "0120"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "01/20",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.3.png"
+    },
+    {
+      "id": "3.4",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "Mês 13 deve ser rejeitado",
+      "campo_alvo": "#validade",
+      "entrada": [
+        "1330"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "13/30",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.4.png"
+    },
+    {
+      "id": "3.5",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "CVV com apenas 1 dígito deve ser rejeitado",
+      "campo_alvo": "#cvv",
+      "entrada": [
+        "1"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "1",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.5.png"
+    },
+    {
+      "id": "3.6",
+      "cenario": "Cenário 3 — Pagamento",
+      "descricao": "Cartão válido deve ser aceito",
+      "campo_alvo": "#cartao",
+      "entrada": [
+        "4539578763621486"
+      ],
+      "esperado": "aceita",
+      "status": "PASSOU",
+      "motivo": "aceitou o valor válido e concluiu o envio",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "4539578763621486",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_3.6.png"
+    },
+    {
+      "id": "4.1",
+      "cenario": "Cenário 4 — Cupom",
+      "descricao": "Cupom expirado (VERAO2024) não deve ser aplicado",
+      "campo_alvo": "#cupom",
+      "entrada": [
+        "VERAO2024"
+      ],
+      "esperado": "verificacoes",
+      "status": "FALHOU",
+      "motivo": "#cupom-msg deveria conter \"inválido\", mas mostra \"Cupom aplicado com sucesso.\"; #total deveria ser \"R$ 235,30\", mas é \"R$ 202,78\"",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "VERAO2024",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_4.1.png"
+    },
+    {
+      "id": "4.2",
+      "cenario": "Cenário 4 — Cupom",
+      "descricao": "Cupom inexistente deve ser rejeitado",
+      "campo_alvo": "#cupom",
+      "entrada": [
+        "NAOEXISTE99"
+      ],
+      "esperado": "verificacoes",
+      "status": "PASSOU",
+      "motivo": "todas as verificações da página bateram com o esperado",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "NAOEXISTE99",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_4.2.png"
+    },
+    {
+      "id": "5.1",
+      "cenario": "Cenário 5 — CEP",
+      "descricao": "CEP incompleto deve ser rejeitado",
+      "campo_alvo": "#cep",
+      "entrada": [
+        "1234"
+      ],
+      "esperado": "bloqueia",
+      "status": "PASSOU",
+      "motivo": "bloqueou e exibiu \"CEP deve ter 8 dígitos\"",
+      "campo_marcado_invalido": true,
+      "mensagem_do_campo": "CEP deve ter 8 dígitos",
+      "valor_final_do_campo": "1234",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [
+        "CEP deve ter 8 dígitos"
+      ],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_5.1.png"
+    },
+    {
+      "id": "5.2",
+      "cenario": "Cenário 5 — CEP",
+      "descricao": "CEP inexistente (99999-999) deve avisar o usuário",
+      "campo_alvo": "#cep",
+      "entrada": [
+        "99999999"
+      ],
+      "esperado": "bloqueia",
+      "status": "FALHOU",
+      "motivo": "ACEITOU um valor que deveria ter sido rejeitado — o envio foi concluído",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "99999-999",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_5.2.png"
+    },
+    {
+      "id": "6.1",
+      "cenario": "Cenário 6 — Sanitização",
+      "descricao": "Script no campo nome não deve executar nem quebrar a página",
+      "campo_alvo": "#nome",
+      "entrada": [
+        "<script>alert(1)</script>"
+      ],
+      "esperado": "aceita",
+      "status": "PASSOU",
+      "motivo": "aceitou o valor válido e concluiu o envio",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "<script>alert(1)</script>",
+      "envio_concluido": true,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_6.1.png"
+    },
+    {
+      "id": "4.3",
+      "cenario": "Cenário 4 — Cupom",
+      "descricao": "Cupom de R$500 num pedido de R$235,30 não pode gerar total negativo",
+      "campo_alvo": "#cupom",
+      "entrada": [
+        "SUPER500"
+      ],
+      "esperado": "verificacoes",
+      "status": "FALHOU",
+      "motivo": "#total não deveria conter \"-\", mas mostra \"R$ -264,70\"",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "SUPER500",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_4.3.png"
+    },
+    {
+      "id": "4.4",
+      "cenario": "Cenário 4 — Cupom",
+      "descricao": "Cupom válido (GIRASSOL10) deve aplicar 10% e recalcular o total",
+      "campo_alvo": "#cupom",
+      "entrada": [
+        "GIRASSOL10"
+      ],
+      "esperado": "verificacoes",
+      "status": "PASSOU",
+      "motivo": "todas as verificações da página bateram com o esperado",
+      "campo_marcado_invalido": false,
+      "mensagem_do_campo": "",
+      "valor_final_do_campo": "GIRASSOL10",
+      "envio_concluido": false,
+      "mensagens_da_pagina": [],
+      "erro_servidor": false,
+      "erros_console": [],
+      "evidencia": "/home/claude/loja-girassol/resultados/evidencias/caso_4.4.png"
+    }
+  ]
+}

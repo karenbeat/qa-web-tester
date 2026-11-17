@@ -1,0 +1,506 @@
+{
+  "url": "http://localhost:8000/checkout.html",
+  "indicador_sucesso": "#sucesso",
+  "preenchimento_base": [
+    {
+      "seletor": "#nome",
+      "valor": "Maria Aparecida Souza"
+    },
+    {
+      "seletor": "#cpf",
+      "valor": "52998224725"
+    },
+    {
+      "seletor": "#email",
+      "valor": "qa.teste@exemplo.com.br"
+    },
+    {
+      "seletor": "#telefone",
+      "valor": "61999998888"
+    },
+    {
+      "seletor": "#cep",
+      "valor": "70040010"
+    },
+    {
+      "seletor": "#rua",
+      "valor": "Setor Comercial Sul"
+    },
+    {
+      "seletor": "#numero",
+      "valor": "120"
+    },
+    {
+      "seletor": "#cidade",
+      "valor": "Brasília"
+    },
+    {
+      "seletor": "#cartao",
+      "valor": "4539578763621486"
+    },
+    {
+      "seletor": "#titular",
+      "valor": "MARIA A SOUZA"
+    },
+    {
+      "seletor": "#validade",
+      "valor": "1230"
+    },
+    {
+      "seletor": "#cvv",
+      "valor": "123"
+    }
+  ],
+  "casos": [
+    {
+      "id": "1.1",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "Campo vazio deve bloquear e exibir mensagem",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": ""
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia",
+      "mensagem_esperada": "CPF"
+    },
+    {
+      "id": "1.2",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "CPF válido deve ser aceito",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": "52998224725"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "aceita"
+    },
+    {
+      "id": "1.3",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "CPF com dígito verificador errado deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": "52998224726"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia",
+      "mensagem_esperada": "inválido"
+    },
+    {
+      "id": "1.4",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "CPF com todos os dígitos iguais deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": "11111111111"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia",
+      "mensagem_esperada": "inválido"
+    },
+    {
+      "id": "1.5",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "Máscara deve formatar 52998224725 como 529.982.247-25",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": "52998224725"
+        }
+      ],
+      "esperado": "mascara",
+      "valor_formatado_esperado": "529.982.247-25"
+    },
+    {
+      "id": "1.6",
+      "cenario": "Cenário 1 — Campo CPF",
+      "campo_alvo": "#cpf",
+      "descricao": "CPF incompleto deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cpf",
+          "valor": "529982247"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "2.1",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "campo_alvo": "#email",
+      "descricao": "E-mail sem domínio deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#email",
+          "valor": "cliente@"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "2.2",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "campo_alvo": "#email",
+      "descricao": "E-mail sem TLD deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#email",
+          "valor": "cliente@exemplo"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "2.3",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "campo_alvo": "#nome",
+      "descricao": "Nome com apenas espaços deve ser tratado como vazio",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#nome",
+          "valor": "   "
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "2.4",
+      "cenario": "Cenário 2 — E-mail e nome",
+      "campo_alvo": "#telefone",
+      "descricao": "DDD inexistente (00) deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#telefone",
+          "valor": "00999998888"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.1",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#cartao",
+      "descricao": "Número de cartão que falha no algoritmo de Luhn deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cartao",
+          "valor": "4539578763621487"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.2",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#cartao",
+      "descricao": "Sequência óbvia de dígitos deve ser rejeitada",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cartao",
+          "valor": "1111111111111111"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.3",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#validade",
+      "descricao": "Validade no passado deve ser rejeitada",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#validade",
+          "valor": "0120"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.4",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#validade",
+      "descricao": "Mês 13 deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#validade",
+          "valor": "1330"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.5",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#cvv",
+      "descricao": "CVV com apenas 1 dígito deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cvv",
+          "valor": "1"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "3.6",
+      "cenario": "Cenário 3 — Pagamento",
+      "campo_alvo": "#cartao",
+      "descricao": "Cartão válido deve ser aceito",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cartao",
+          "valor": "4539578763621486"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "aceita"
+    },
+    {
+      "id": "4.1",
+      "cenario": "Cenário 4 — Cupom",
+      "campo_alvo": "#cupom",
+      "descricao": "Cupom expirado (VERAO2024) não deve ser aplicado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cupom",
+          "valor": "VERAO2024"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#aplicar-cupom"
+        }
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [
+        {
+          "seletor": "#cupom-msg",
+          "contem": "inválido"
+        },
+        {
+          "seletor": "#total",
+          "igual": "R$ 235,30"
+        }
+      ]
+    },
+    {
+      "id": "4.2",
+      "cenario": "Cenário 4 — Cupom",
+      "campo_alvo": "#cupom",
+      "descricao": "Cupom inexistente deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cupom",
+          "valor": "NAOEXISTE99"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#aplicar-cupom"
+        }
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [
+        {
+          "seletor": "#cupom-msg",
+          "contem": "inválido"
+        },
+        {
+          "seletor": "#total",
+          "igual": "R$ 235,30"
+        }
+      ]
+    },
+    {
+      "id": "5.1",
+      "cenario": "Cenário 5 — CEP",
+      "campo_alvo": "#cep",
+      "descricao": "CEP incompleto deve ser rejeitado",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cep",
+          "valor": "1234"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "5.2",
+      "cenario": "Cenário 5 — CEP",
+      "campo_alvo": "#cep",
+      "descricao": "CEP inexistente (99999-999) deve avisar o usuário",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cep",
+          "valor": "99999999"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "bloqueia"
+    },
+    {
+      "id": "6.1",
+      "cenario": "Cenário 6 — Sanitização",
+      "campo_alvo": "#nome",
+      "descricao": "Script no campo nome não deve executar nem quebrar a página",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#nome",
+          "valor": "<script>alert(1)</script>"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#finalizar"
+        }
+      ],
+      "esperado": "aceita"
+    },
+    {
+      "id": "4.3",
+      "cenario": "Cenário 4 — Cupom",
+      "campo_alvo": "#cupom",
+      "descricao": "Cupom de R$500 num pedido de R$235,30 não pode gerar total negativo",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cupom",
+          "valor": "SUPER500"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#aplicar-cupom"
+        }
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [
+        {
+          "seletor": "#total",
+          "nao_contem": "-"
+        }
+      ]
+    },
+    {
+      "id": "4.4",
+      "cenario": "Cenário 4 — Cupom",
+      "campo_alvo": "#cupom",
+      "descricao": "Cupom válido (GIRASSOL10) deve aplicar 10% e recalcular o total",
+      "acoes": [
+        {
+          "tipo": "preencher",
+          "seletor": "#cupom",
+          "valor": "GIRASSOL10"
+        },
+        {
+          "tipo": "clicar",
+          "seletor": "#aplicar-cupom"
+        }
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [
+        {
+          "seletor": "#cupom-msg",
+          "contem": "sucesso"
+        },
+        {
+          "seletor": "#total",
+          "igual": "R$ 213,62"
+        }
+      ]
+    }
+  ]
+}

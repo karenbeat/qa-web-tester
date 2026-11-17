@@ -1,0 +1,66 @@
+{
+  "url": "http://localhost:8000/index.html",
+  "limpar_storage": true,
+
+  "_comentario": "Testes do carrinho. Diferente do checkout, aqui o estado vive no localStorage do navegador — por isso 'limpar_storage' é essencial: sem ele, o item adicionado num caso continua no carrinho do caso seguinte.",
+
+  "casos": [
+    {
+      "id": "8.1",
+      "cenario": "Cenário 8 — Carrinho",
+      "campo_alvo": "#qtd-carrinho",
+      "descricao": "Produto esgotado (Fita adesiva, estoque 0) não deve ser adicionável",
+      "acoes": [{"tipo": "clicar", "seletor": "#add-4"}],
+      "esperado": "verificacoes",
+      "verificacoes": [{"seletor": "#qtd-carrinho", "igual": "0"}]
+    },
+    {
+      "id": "8.2",
+      "cenario": "Cenário 8 — Carrinho",
+      "campo_alvo": "#qtd-1",
+      "descricao": "Quantidade negativa não deve ser aceita",
+      "acoes": [
+        {"tipo": "clicar", "seletor": "#add-1"},
+        {"tipo": "preencher", "seletor": "#qtd-1", "valor": "-5"}
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [{"seletor": "#total", "nao_contem": "-"}]
+    },
+    {
+      "id": "8.3",
+      "cenario": "Cenário 8 — Carrinho",
+      "campo_alvo": "#qtd-2",
+      "descricao": "Quantidade acima do estoque (Caneta gel, estoque 3) deve ser limitada",
+      "acoes": [
+        {"tipo": "clicar", "seletor": "#add-2"},
+        {"tipo": "preencher", "seletor": "#qtd-2", "valor": "99"}
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [{"seletor": "#qtd-carrinho", "nao_contem": "99"}]
+    },
+    {
+      "id": "8.4",
+      "cenario": "Cenário 8 — Carrinho",
+      "campo_alvo": "#qtd-carrinho",
+      "descricao": "Adicionar produto em estoque deve funcionar normalmente",
+      "acoes": [{"tipo": "clicar", "seletor": "#add-1"}],
+      "esperado": "verificacoes",
+      "verificacoes": [{"seletor": "#qtd-carrinho", "igual": "1"}]
+    },
+    {
+      "id": "8.5",
+      "cenario": "Cenário 8 — Carrinho",
+      "campo_alvo": "#qtd-carrinho",
+      "descricao": "Remover item deve esvaziar o carrinho e zerar o total",
+      "acoes": [
+        {"tipo": "clicar", "seletor": "#add-1"},
+        {"tipo": "clicar", "seletor": "#rm-1"}
+      ],
+      "esperado": "verificacoes",
+      "verificacoes": [
+        {"seletor": "#qtd-carrinho", "igual": "0"},
+        {"seletor": "#total", "igual": "R$ 0,00"}
+      ]
+    }
+  ]
+}

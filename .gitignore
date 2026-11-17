@@ -1,0 +1,9 @@
+auditoria/
+auditoria-*/
+resultados-reais/
+sites-*.txt
+*.local.json
+.claude/
+__pycache__/
+*.pyc
+.env

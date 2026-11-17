@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Loja Girassol</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; margin:0; background:#faf9f7; color:#222; }
+  header { background:#2d5016; color:#fff; padding:16px 24px; }
+  header h1 { font-size:20px; margin:0; }
+  main { max-width:640px; margin:28px auto; padding:0 20px 60px; }
+  .aviso { background:#fff8e1; border-left:4px solid #f0ad4e; padding:12px 16px; font-size:14px; margin-bottom:22px; border-radius:0 4px 4px 0; }
+  fieldset { background:#fff; border:1px solid #e5e2dc; border-radius:8px; padding:18px 20px 22px; margin:0 0 20px; }
+  legend { font-weight:700; font-size:15px; padding:0 8px; color:#2d5016; }
+  label { display:block; margin-top:14px; font-size:13px; font-weight:600; color:#444; }
+  input, select { width:100%; padding:9px 10px; margin-top:4px; border:1px solid #c9c5bd; border-radius:5px; font-size:15px; background:#fff; }
+  input.is-invalid { border-color:#d33; background:#fff5f5; }
+  .error { color:#d33; font-size:12.5px; margin-top:4px; display:none; }
+  .error.visivel { display:block; }
+  .linha { display:flex; gap:12px; }
+  .linha > div { flex:1; }
+  .resumo-item { display:flex; justify-content:space-between; padding:7px 0; font-size:14px; border-bottom:1px solid #f0eeea; }
+  .resumo-total { display:flex; justify-content:space-between; font-size:18px; font-weight:700; margin-top:12px; }
+  .cupom-linha { display:flex; gap:8px; align-items:flex-end; }
+  .cupom-linha input { flex:1; }
+  .cupom-linha button { padding:9px 16px; background:#5a7a3a; color:#fff; border:0; border-radius:5px; cursor:pointer; white-space:nowrap; }
+  #cupom-msg { font-size:13px; margin-top:6px; display:none; }
+  #cupom-msg.visivel { display:block; }
+  #finalizar { width:100%; padding:14px; background:#f4b942; color:#2d2d2d; border:0; border-radius:6px; font-size:16px; font-weight:700; cursor:pointer; }
+  #sucesso { display:none; background:#e6ffed; border:1px solid #34a853; border-radius:8px; padding:22px; text-align:center; }
+  #sucesso h2 { margin:0 0 8px; font-size:19px; color:#1a7a34; }
+</style>
+</head>
+<body>
+
+<header><h1>Loja Girassol — Checkout</h1></header>
+
+<main>
+<p class="aviso">
+  Checkout fictício para treino de QA. Contém defeitos propositais.
+  Nenhum dado é enviado ou cobrado.
+</p>
+
+<div id="formulario">
+
+  <fieldset>
+    <legend>Resumo do pedido</legend>
+    <div class="resumo-item"><span>Caderno pautado A5 × 1</span><span>R$ 32,90</span></div>
+    <div class="resumo-item"><span>Marcador pastel 6un × 2</span><span>R$ 94,00</span></div>
+    <div class="resumo-item"><span>Planner 2027 × 1</span><span>R$ 89,90</span></div>
+    <div class="resumo-item"><span>Frete</span><span id="frete">R$ 18,50</span></div>
+    <div class="resumo-item" id="linha-desconto" style="display:none;color:#1a7a34">
+      <span>Desconto</span><span id="valor-desconto">— R$ 0,00</span>
+    </div>
+    <div class="resumo-total"><span>Total</span><span id="total">R$ 235,30</span></div>
+
+    <label for="cupom">Cupom de desconto</label>
+    <div class="cupom-linha">
+      <input type="text" id="cupom" name="cupom" data-testid="campo-cupom" placeholder="Digite o código">
+      <button type="button" id="aplicar-cupom" data-testid="botao-cupom">Aplicar</button>
+    </div>
+    <div id="cupom-msg"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Dados pessoais</legend>
+
+    <label for="nome">Nome completo</label>
+    <input type="text" id="nome" name="nome" data-testid="campo-nome" aria-describedby="erro-nome">
+    <div class="error" id="erro-nome"></div>
+
+    <label for="cpf">CPF</label>
+    <input type="text" id="cpf" name="cpf" data-testid="campo-cpf" maxlength="14" aria-describedby="erro-cpf">
+    <div class="error" id="erro-cpf"></div>
+
+    <label for="email">E-mail</label>
+    <input type="text" id="email" name="email" data-testid="campo-email" aria-describedby="erro-email">
+    <div class="error" id="erro-email"></div>
+
+    <label for="telefone">Telefone</label>
+    <input type="text" id="telefone" name="telefone" data-testid="campo-telefone" maxlength="15" aria-describedby="erro-telefone">
+    <div class="error" id="erro-telefone"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Endereço de entrega</legend>
+
+    <label for="cep">CEP</label>
+    <input type="text" id="cep" name="cep" data-testid="campo-cep" maxlength="9" aria-describedby="erro-cep">
+    <div class="error" id="erro-cep"></div>
+
+    <label for="rua">Rua</label>
+    <input type="text" id="rua" name="rua" data-testid="campo-rua" aria-describedby="erro-rua">
+    <div class="error" id="erro-rua"></div>
+
+    <div class="linha">
+      <div>
+        <label for="numero">Número</label>
+        <input type="text" id="numero" name="numero" data-testid="campo-numero" aria-describedby="erro-numero">
+        <div class="error" id="erro-numero"></div>
+      </div>
+      <div>
+        <label for="cidade">Cidade</label>
+        <input type="text" id="cidade" name="cidade" data-testid="campo-cidade" aria-describedby="erro-cidade">
+        <div class="error" id="erro-cidade"></div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Pagamento</legend>
+
+    <label for="cartao">Número do cartão</label>
+    <input type="text" id="cartao" name="cartao" data-testid="campo-cartao" maxlength="19" aria-describedby="erro-cartao">
+    <div class="error" id="erro-cartao"></div>
+
+    <label for="titular">Nome impresso no cartão</label>
+    <input type="text" id="titular" name="titular" data-testid="campo-titular" aria-describedby="erro-titular">
+    <div class="error" id="erro-titular"></div>
+
+    <div class="linha">
+      <div>
+        <label for="validade">Validade (MM/AA)</label>
+        <input type="text" id="validade" name="validade" data-testid="campo-validade" maxlength="5" aria-describedby="erro-validade">
+        <div class="error" id="erro-validade"></div>
+      </div>
+      <div>
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" data-testid="campo-cvv" maxlength="4" aria-describedby="erro-cvv">
+        <div class="error" id="erro-cvv"></div>
+      </div>
+    </div>
+
+    <label for="parcelas">Parcelamento</label>
+    <select id="parcelas" name="parcelas" data-testid="campo-parcelas">
+      <option value="1">1× sem juros</option>
+      <option value="2">2× sem juros</option>
+      <option value="3">3× sem juros</option>
+      <option value="6">6× sem juros</option>
+    </select>
+  </fieldset>
+
+  <button type="button" id="finalizar" data-testid="botao-finalizar">Finalizar pedido</button>
+</div>
+
+<div id="sucesso" data-testid="pedido-confirmado">
+  <h2>Pedido confirmado</h2>
+  <p>Número do pedido: <strong id="num-pedido"></strong></p>
+  <p>Você receberá um e-mail com os detalhes.</p>
+</div>
+</main>
+
+<script>
+const SUBTOTAL = 216.80;
+const FRETE = 18.50;
+let desconto = 0;
+
+const CUPONS = {
+  'GIRASSOL10': {tipo:'percentual', valor:10, expira:'2030-12-31'},
+  'PRIMEIRA20': {tipo:'percentual', valor:20, expira:'2030-12-31'},
+  'VERAO2024':  {tipo:'percentual', valor:15, expira:'2024-03-31'},
+  'SUPER500':   {tipo:'fixo',       valor:500, expira:'2030-12-31'}
+};
+
+function brl(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+function erro(campo, msg) {
+  const d = document.getElementById('erro-' + campo);
+  const i = document.getElementById(campo);
+  d.textContent = msg; d.classList.add('visivel');
+  i.classList.add('is-invalid'); i.setAttribute('aria-invalid','true');
+}
+function limpar(campo) {
+  const d = document.getElementById('erro-' + campo);
+  const i = document.getElementById(campo);
+  d.classList.remove('visivel');
+  i.classList.remove('is-invalid'); i.removeAttribute('aria-invalid');
+}
+
+function atualizarTotal() {
+  const total = SUBTOTAL + FRETE - desconto;
+  document.getElementById('total').textContent = brl(total);
+  const linha = document.getElementById('linha-desconto');
+  if (desconto > 0) {
+    linha.style.display = 'flex';
+    document.getElementById('valor-desconto').textContent = '— ' + brl(desconto);
+  } else {
+    linha.style.display = 'none';
+  }
+}
+
+// DEFEITO 1: não verifica a data de expiração do cupom.
+// DEFEITO 2: não limita o desconto ao valor do pedido, permitindo total negativo.
+document.getElementById('aplicar-cupom').addEventListener('click', () => {
+  const codigo = document.getElementById('cupom').value.trim().toUpperCase();
+  const msg = document.getElementById('cupom-msg');
+  msg.classList.add('visivel');
+
+  const cupom = CUPONS[codigo];
+  if (!cupom) {
+    msg.textContent = 'Cupom inválido.';
+    msg.style.color = '#d33';
+    desconto = 0;
+  } else {
+    desconto = cupom.tipo === 'percentual'
+      ? SUBTOTAL * cupom.valor / 100
+      : cupom.valor;
+    msg.textContent = 'Cupom aplicado com sucesso.';
+    msg.style.color = '#1a7a34';
+  }
+  atualizarTotal();
+});
+
+// Máscaras
+document.getElementById('cpf').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  v = v.replace(/(\d{3})(\d)/,'$1.$2')
+       .replace(/(\d{3})\.(\d{3})(\d)/,'$1.$2.$3')
+       .replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/,'$1.$2.$3-$4');
+  e.target.value = v;
+});
+document.getElementById('telefone').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 6) v = v.replace(/(\d{2})(\d{4,5})(\d{4})/,'($1) $2-$3');
+  else if (v.length > 2) v = v.replace(/(\d{2})(\d+)/,'($1) $2');
+  e.target.value = v;
+});
+document.getElementById('cep').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,8);
+  if (v.length > 5) v = v.replace(/(\d{5})(\d)/,'$1-$2');
+  e.target.value = v;
+});
+document.getElementById('validade').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,4);
+  if (v.length > 2) v = v.replace(/(\d{2})(\d)/,'$1/$2');
+  e.target.value = v;
+});
+// DEFEITO 3: o campo do cartão não aplica máscara nenhuma.
+
+// Busca de CEP simulada
+document.getElementById('cep').addEventListener('blur', e => {
+  const cep = e.target.value.replace(/\D/g,'');
+  if (cep.length !== 8) return;
+  const base = {
+    '70040010': {rua:'Setor Comercial Sul', cidade:'Brasília'},
+    '01310100': {rua:'Avenida Paulista',    cidade:'São Paulo'},
+    '20040020': {rua:'Rua da Assembleia',   cidade:'Rio de Janeiro'}
+  };
+  const achado = base[cep];
+  if (achado) {
+    document.getElementById('rua').value = achado.rua;
+    document.getElementById('cidade').value = achado.cidade;
+  }
+  // DEFEITO 4: quando o CEP não existe, não avisa nada e não limpa os campos
+  // preenchidos por uma consulta anterior.
+});
+
+// DEFEITO 5: valida os dígitos verificadores, mas aceita sequências repetidas.
+function cpfValido(valor) {
+  const n = valor.replace(/\D/g,'');
+  if (n.length !== 11) return false;
+  let s = 0;
+  for (let i=0;i<9;i++) s += parseInt(n[i])*(10-i);
+  let d1 = s%11 < 2 ? 0 : 11-(s%11);
+  if (d1 !== parseInt(n[9])) return false;
+  s = 0;
+  for (let i=0;i<10;i++) s += parseInt(n[i])*(11-i);
+  let d2 = s%11 < 2 ? 0 : 11-(s%11);
+  return d2 === parseInt(n[10]);
+}
+
+document.getElementById('finalizar').addEventListener('click', () => {
+  ['nome','cpf','email','telefone','cep','rua','numero','cidade',
+   'cartao','titular','validade','cvv'].forEach(limpar);
+  let ok = true;
+
+  // DEFEITO 6: não faz trim, então só espaços passa como nome válido.
+  const nome = document.getElementById('nome').value;
+  if (nome.length === 0) { erro('nome','Informe o nome completo'); ok = false; }
+
+  const cpf = document.getElementById('cpf').value;
+  if (cpf.trim() === '') { erro('cpf','Informe o CPF'); ok = false; }
+  else if (!cpfValido(cpf)) { erro('cpf','CPF inválido'); ok = false; }
+
+  // DEFEITO 7: a validação de e-mail só exige um arroba.
+  const email = document.getElementById('email').value;
+  if (!email.includes('@')) { erro('email','E-mail inválido'); ok = false; }
+
+  // DEFEITO 8: não valida o DDD.
+  const tel = document.getElementById('telefone').value.replace(/\D/g,'');
+  if (tel.length < 10) { erro('telefone','Telefone incompleto'); ok = false; }
+
+  const cep = document.getElementById('cep').value.replace(/\D/g,'');
+  if (cep.length !== 8) { erro('cep','CEP deve ter 8 dígitos'); ok = false; }
+
+  if (document.getElementById('rua').value.trim() === '') { erro('rua','Informe a rua'); ok = false; }
+  if (document.getElementById('numero').value.trim() === '') { erro('numero','Informe o número'); ok = false; }
+  if (document.getElementById('cidade').value.trim() === '') { erro('cidade','Informe a cidade'); ok = false; }
+
+  // DEFEITO 9: aceita qualquer sequência de 13 a 19 dígitos, sem checar o Luhn.
+  const cartao = document.getElementById('cartao').value.replace(/\D/g,'');
+  if (cartao.length < 13 || cartao.length > 19) {
+    erro('cartao','Número de cartão inválido'); ok = false;
+  }
+
+  if (document.getElementById('titular').value.trim() === '') {
+    erro('titular','Informe o nome do titular'); ok = false;
+  }
+
+  // DEFEITO 10: confere só o formato, aceitando mês 13 e validade no passado.
+  const val = document.getElementById('validade').value;
+  if (!/^\d{2}\/\d{2}$/.test(val)) { erro('validade','Use o formato MM/AA'); ok = false; }
+
+  // DEFEITO 11: aceita CVV de 1 a 4 dígitos.
+  const cvv = document.getElementById('cvv').value.replace(/\D/g,'');
+  if (cvv.length < 1) { erro('cvv','Informe o CVV'); ok = false; }
+
+  if (ok) {
+    document.getElementById('formulario').style.display = 'none';
+    const s = document.getElementById('sucesso');
+    document.getElementById('num-pedido').textContent =
+      'GS' + Math.floor(100000 + Math.random()*900000);
+    s.style.display = 'block';
+  }
+});
+
+atualizarTotal();
+</script>
+</body>
+</html>
